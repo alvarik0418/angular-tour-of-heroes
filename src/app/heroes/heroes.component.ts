@@ -5,6 +5,7 @@ import { NgFor, NgIf, UpperCasePipe } from '@angular/common';
 import { Hero } from '../hero';
 import { HEROES } from '../mock-heroes';
 import { HeroDetailsComponent } from '../hero-details/hero-details.component';
+import { HeroService } from '../hero.service';
 
 @Component({
   selector: 'app-heroes',
@@ -14,16 +15,26 @@ import { HeroDetailsComponent } from '../hero-details/hero-details.component';
     NgIf,
     NgFor,
     UpperCasePipe,
-    HeroDetailsComponent
+    HeroDetailsComponent,
   ],
   templateUrl: './heroes.component.html',
   styleUrl: './heroes.component.css'
 })
 export class HeroesComponent {
-  heroes = HEROES
+  heroes: Hero[] = [];
   selectedHero?: Hero
+
+  constructor(private heroService: HeroService){}
+
+  ngOnInit(): void {
+    this.getHeroes();
+  }
 
   onSelect(hero: Hero):void{
     this.selectedHero = hero
+  }
+
+  getHeroes(): void {
+      this.heroService.gerHeroes().subscribe(heroes => this.heroes = heroes);
   }
 }
