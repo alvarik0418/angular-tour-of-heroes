@@ -1,3 +1,9 @@
 <h2>{{title}}</h2>
-<app-heroes></app-heroes>
+<nav>
+    <a routerLink="/dashboard">Dashboard</a>
+    <a routerLink="/heroes">Heroes</a>    
+</nav>
+<!--Es donde se renderizan los routers configurados-->
+<router-outlet></router-outlet>
+
 <app-messages></app-messages>
