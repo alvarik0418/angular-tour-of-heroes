@@ -21,6 +21,6 @@ export class DashboardComponent {
   }
 
   getHeroes(): void {
-    this.heroService.gerHeroes().subscribe(heroes => this.heroes = heroes.slice(1,-4));
+    this.heroService.gerHeroes().subscribe(heroes => this.heroes = heroes.slice(0,4));
   }
 }
