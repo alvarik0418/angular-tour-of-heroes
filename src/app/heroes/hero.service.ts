@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Hero } from './hero';
-//import { HEROES } from './mock-heroes';
+import { Hero } from '../heroes/hero';
 import { Observable, catchError, of, tap } from 'rxjs';
-import { MessageService } from './message.service';
+import { MessageService } from '../message.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+export type HeroNew = Omit<Hero, 'id'|'createAt'|'updatedAt'>;
 
 @Injectable({
   providedIn: 'root'
@@ -51,6 +52,15 @@ export class HeroService {
     return this.http.patch(urlHeroId, hero, this.httpOptions).pipe(
       tap(_ => this.log(`updated heroe id = ${hero.id}`)),
       catchError(this.handleError<any>(`update hero`)
+    ));
+  } 
+
+  createHero(hero: HeroNew): Observable<any>{
+    const urlHeroId = `${this.apiUrl}`;
+
+    return this.http.post(urlHeroId, hero, this.httpOptions).pipe(
+      tap(_ => this.log(`created heroe name = ${hero.name}`)),
+      catchError(this.handleError<any>(`create hero`)
     ));
   } 
 }
