@@ -3,7 +3,6 @@ import { FormsModule } from '@angular/forms';
 import { Location, NgFor, NgIf, UpperCasePipe } from '@angular/common';
 
 import { Hero } from './hero';
-import { HeroDetailsComponent } from '../hero-details/hero-details.component';
 import { HeroService } from './hero.service';
 import { MessageService } from '../message.service';
 import { RouterLink, RouterModule } from '@angular/router';
@@ -17,7 +16,6 @@ import { PowersService } from '../powers/powers.service';
     NgIf,
     NgFor,
     UpperCasePipe,
-    HeroDetailsComponent,
     RouterLink,
     RouterModule
   ],
