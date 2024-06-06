@@ -2,8 +2,8 @@ import { Location, NgFor, NgIf, UpperCasePipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeroFormsGroup } from '../hero-forms-group';
-import { PowersService } from '../heroes/powers.service';
-import { Power } from '../powers';
+import { PowersService } from '../powers/powers.service';
+import { Power } from '../powers/power';
 import { Hero } from '../heroes/hero';
 import { HeroNew, HeroService } from '../heroes/hero.service';
 

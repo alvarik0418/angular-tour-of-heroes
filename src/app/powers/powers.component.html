@@ -1,0 +1,20 @@
+<h2>My Powers</h2>
+<button type="button" (click)="gotoBack()">Go back</button>
+<table class="minimalistBlack">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>CreatedAt</th>
+        <th>UpdatedAt</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let power of powers">
+        <td>{{power.id}}</td>
+        <td>{{power.name}}</td>
+        <td>{{power.createdAt}}</td>
+        <td>{{power.updatedAt}}</td>
+    </tr>
+</tbody>
+</table>

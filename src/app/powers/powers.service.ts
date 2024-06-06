@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { MessageService } from '../message.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, of, tap } from 'rxjs';
-import { Power } from '../powers';
+import { Power } from './power';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +29,14 @@ export class PowersService {
     return this.http.get<Power[]>(this.powerUrl).pipe(
       tap(_ => this.log('fetched powers')),
       catchError(this.handleError<Power[]>('getPowers',[])
+    ));
+  }
+
+  getPower(id: number): Observable<Power>{
+    const urlPowerId = `${this.powerUrl}/${id}`;
+    
+    return this.http.get<Power>(urlPowerId).pipe(
+      catchError(this.handleError<Power>(`getPower ${id}`)
     ));
   }
 }

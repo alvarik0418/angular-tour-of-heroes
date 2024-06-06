@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgFor, NgIf, UpperCasePipe } from '@angular/common';
+import { Location, NgFor, NgIf, UpperCasePipe } from '@angular/common';
 
 import { Hero } from './hero';
 import { HeroDetailsComponent } from '../hero-details/hero-details.component';
 import { HeroService } from './hero.service';
 import { MessageService } from '../message.service';
 import { RouterLink, RouterModule } from '@angular/router';
+import { PowersService } from '../powers/powers.service';
 
 @Component({
   selector: 'app-heroes',
@@ -25,9 +26,15 @@ import { RouterLink, RouterModule } from '@angular/router';
 })
 export class HeroesComponent {
   heroes: Hero[] = [];
+  heroesT: Hero[] = [];
   selectedHero?: Hero
 
-  constructor(private heroService: HeroService, private messageService: MessageService){}
+  constructor(private heroService: HeroService, 
+              private powerService: PowersService,
+              private messageService: MessageService, 
+              private location: Location)
+
+  {}
 
   ngOnInit(): void {
     this.getHeroes();
@@ -40,6 +47,20 @@ export class HeroesComponent {
   }
 
   getHeroes(): void {
-      this.heroService.gerHeroes().subscribe(heroes => this.heroes = heroes);
+      //this.heroService.gerHeroes().subscribe(heroes => this.heroes = heroes);
+      this.heroService.gerHeroes().subscribe(heroes => 
+        {
+          heroes.map((hero) => {
+            this.powerService.getPower(hero.id).subscribe(
+              power => {
+              hero.powerName = power.name
+            });
+          });
+          this.heroes = heroes;
+        });      
+    }
+
+  gotoBack(): void {
+    this.location.back();
   }
 }
