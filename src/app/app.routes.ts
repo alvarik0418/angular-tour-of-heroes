@@ -13,8 +13,16 @@ export const routes: Routes = [
       component: HeroesComponent,
       canActivate: [authGuard] },
     { path:'heroes/new', component: HeroNewComponent},
-    { path:'detail/:id', component: HeroDetailsComponent},
-    { path:'dashboard', component:DashboardComponent},
+    {
+      path: 'detail/:id',
+      canActivate: [authGuard],
+      loadComponent: () => import('./hero-details/hero-details.component').then(module => module.HeroDetailsComponent)
+    },
+    {
+      path: 'dashboard',
+      canActivate: [authGuard],
+      loadComponent: () => import('./dashboard/dashboard.component').then(module => module.DashboardComponent)
+    },
     { path:'login', component:LoginComponent},
    // { path: '**', component: NoFoundComponent}
 ];
